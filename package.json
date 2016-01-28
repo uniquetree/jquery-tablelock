@@ -1,0 +1,27 @@
+{
+  "name": "jquery-tablelock",
+  "version": "1.0.0",
+  "description": "A jquery plugin to lock the table's row or column",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/uniquetree/jquery-tablelock.git"
+  },
+  "keywords": [
+    "jquery",
+    "plugin",
+    "tablelock"
+  ],
+  "author": "郑树聪",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/uniquetree/jquery-tablelock/issues"
+  },
+  "homepage": "https://github.com/uniquetree/jquery-tablelock#readme",
+  "devDependencies": {
+    "gulp": "^3.9.0"
+  }
+}
