@@ -1,3 +1,10 @@
+/**
+ * jquery-tablelock - A jquery plugin to lock the table's row or column
+ * @author 郑树聪
+ * @version 1.0.0
+ * @link https://github.com/uniquetree/jquery-tablelock#readme
+ * @license MIT
+ */
 ;(function($) {
 
     // 插件全局变量，此处全局this指向当前调用此插件的DOM的jquery对象，

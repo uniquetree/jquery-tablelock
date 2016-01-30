@@ -1,0 +1,47 @@
+@charset "UTF-8";
+/**
+ * jquery-tablelock - A jquery plugin to lock the table's row or column
+ * @author 郑树聪
+ * @version 1.0.0
+ * @link https://github.com/uniquetree/jquery-tablelock#readme
+ * @license MIT
+ */
+table {
+  border-collapse: collapse;
+}
+
+.lock-table-box,
+.lock-row,
+.lock-col {
+  position: relative;
+}
+
+.lock-table-box {
+  overflow: auto;
+}
+
+.lock-row {
+  top: 0px;
+  z-index: 2;
+}
+
+.lock-col {
+  left: 0px;
+  z-index: 1;
+}
+
+.lock-cross {
+  z-index: 3;
+}
+
+.clearfix {
+  zoom: 1;
+}
+
+.clearfix:after {
+  display: block;
+  clear: both;
+  content: '';
+  height: 0;
+  visibility: hidden;
+}

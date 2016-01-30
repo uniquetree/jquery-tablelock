@@ -22,8 +22,8 @@ gulp.task('change-env', function(){
 var pkg = require('./package.json');
 var banner = ['/**',
   ' * <%= pkg.name %> - <%= pkg.description %>',
-  ' * @author v<%= pkg.author %>',
-  ' * @version v<%= pkg.version %>',
+  ' * @author <%= pkg.author %>',
+  ' * @version <%= pkg.version %>',
   ' * @link <%= pkg.homepage %>',
   ' * @license <%= pkg.license %>',
   ' */',
@@ -37,12 +37,14 @@ gulp.task('sass', function(){
     if(env){
         return gulp.src(scssSrc)
             .pipe(watch(scssSrc))
-            .pipe(sourcemaps.init())
             .pipe(header(banner, {pkg: pkg}))
             .pipe(autoprefixer({
                 browsers: ['last 2 versions'],
 			    cascade: false
             }))
+            .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
+            .pipe(gulp.dest(cssDist))
+            .pipe(sourcemaps.init())
             .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
             .pipe(sourcemaps.write())
             .pipe(rename({
@@ -53,6 +55,8 @@ gulp.task('sass', function(){
         return gulp.src(scssSrc)
             .pipe(watch(scssSrc))
             .pipe(header(banner, {pkg: pkg}))
+            .pipe(sass({outputStyle: 'expanded'}).on('error', sass.logError))
+            .pipe(gulp.dest(cssDist))
             .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
             .pipe(rename({
                 suffix: ".min"
@@ -69,24 +73,26 @@ gulp.task('js', function(){
     if(env){
         return gulp.src(jsSrc)
             .pipe(watch(jsSrc))
+            .pipe(header(banner, {pkg: pkg}))
             .pipe(jshint())
+            .pipe(gulp.dest(jsDist))
             .pipe(sourcemaps.init())
             .pipe(uglify())
             .pipe(rename({
                 suffix: ".min"
             }))
             .pipe(sourcemaps.write())
-            .pipe(header(banner, {pkg: pkg}))
             .pipe(gulp.dest(jsDist));
     } else {
         return gulp.src(jsSrc)
             .pipe(watch(jsSrc))
+            .pipe(header(banner, {pkg: pkg}))
             .pipe(jshint())
+            .pipe(gulp.dest(jsDist))
             .pipe(uglify())
             .pipe(rename({
                 suffix: ".min"
             }))
-            .pipe(header(banner, {pkg: pkg}))
             .pipe(gulp.dest(jsDist));
     }
 });
@@ -102,7 +108,7 @@ gulp.task('clean', function() {
     .pipe(clean());
 });
 
-gulp.task('dev', ['copy:bower', 'sass', 'js']);
+gulp.task('dev', ['sass', 'js']);
 gulp.task('release', ['change-env', 'clean', 'copy:bower', 'sass', 'js']);
 
 gulp.task('default', ['dev']);

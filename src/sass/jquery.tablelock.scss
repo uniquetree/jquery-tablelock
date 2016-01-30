@@ -1,0 +1,47 @@
+@charset 'utf-8';
+
+// 设置单元格间隙的样式
+table {
+    border-collapse: collapse;
+}
+
+.lock-table-box,
+.lock-row,
+.lock-col {
+    position: relative;
+}
+
+// 表格动态添加的外部div样式
+.lock-table-box {
+    overflow: auto;
+}
+
+// 锁定行的样式
+.lock-row {
+    top: 0px;
+    z-index: 2;
+}
+
+// 锁定列的样式
+.lock-col {
+    left: 0px;
+    z-index: 1;
+}
+
+// 行列交叉处样式
+.lock-cross {
+    z-index: 3;
+}
+
+// 浮动相关
+.clearfix {
+    zoom: 1;
+    
+    &:after{
+        display: block;
+        clear: both;
+        content: '';
+        height: 0;
+        visibility: hidden;
+    }
+}
