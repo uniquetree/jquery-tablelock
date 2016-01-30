@@ -20,7 +20,7 @@
     "test",
     "tests"
   ],
-  "dependencies": {
+  "devDependencies": {
     "jquery": "1.11.3"
   }
 }
