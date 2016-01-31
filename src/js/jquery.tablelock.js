@@ -1,7 +1,7 @@
 ;(function($) {
 
     // 插件全局变量，此处全局this指向当前调用此插件的DOM的jquery对象，
-    var thisTable = this;
+    var thisTable;
 
     function _TableLock(options){
         this.options = $.extend({}, $.fn.TableLock.defaults, options);
@@ -28,7 +28,7 @@
         // 锁定行tr,tr包括thead和tbody下的所有tr
         for(var row = 0; row < this.options.lockRowNum; row++) {
             tr = thisTable.find('tr:eq(' + row + ')');
-            tr.addClass('lock-row');
+            tr.find('th, td').addClass('lock-row').css('backgroundColor', this.options.backgroundColor);
             // 锁定行列交叉处，若锁定的列数也大于0，则行列交叉处进行再次锁定
             for(var col = 0; col < this.options.lockColNum; col++ ){
                 if(tr){
@@ -47,7 +47,8 @@
         thisTable.find('tr').each(function(index, val){
             // 锁定列
             for(var col = 0; col < that.options.lockColNum; col++) {
-                $(this).find('th:eq( ' + col + ' ), td:eq(' + col + ')').addClass('lock-col');
+                $(this).find('th:eq( ' + col + ' ), td:eq(' + col + ')').addClass('lock-col')
+                    .css('backgroundColor', that.options.backgroundColor);
             }
         });
     };
@@ -72,6 +73,7 @@
     };
 
     $.fn.TableLock = function(method) {
+        thisTable = this;
         // 方法调用
         if (methods[method]) {
             return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
@@ -86,8 +88,9 @@
     $.fn.TableLock.defaults = {
         lockRowNum:1,   //锁定的行数，默认1行
         lockColNum:1,   //锁定的列数，默认1列
-        width: 400,     //表格宽度，默认为400px
-        height: 200     //表格高度，默认为200px
+        width: '100%',     //表格宽度，默认为400px
+        height: '100%',     //表格高度，默认为200px
+        backgroundColor: '#fff'
     };
 
 }(jQuery));
